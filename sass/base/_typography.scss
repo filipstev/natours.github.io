@@ -1,0 +1,91 @@
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+   /* font-size: 16px; */ 
+    line-height: 1.7;
+    color: $color-grey-dark;
+    
+    box-sizing: border-box; /* specified width is also the total width. excludes the right, left, top and bottom padding. */
+}
+
+.heading-primary {
+    color: $color-white;
+    text-transform: uppercase;
+
+    backface-visibility: hidden; /*  check this out again. Prevents "shaking" */
+    margin-bottom: 6rem;
+    
+    &--main {
+    display: block; /* makes it drop in the second line. 19 lesson. explains what block, inline block and inline is */
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    animation-name: moveInLeft ; 
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+
+    @include respond(phone) {
+        letter-spacing: 1rem;
+        font-family: 5rem;
+    }
+    
+
+    /*
+    animation-iteration-count: 3;
+    animation-delay: 3s;
+    */
+    }
+
+    &--sub {
+        display: block; /* makes it drop in the second line */
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.75rem;
+        animation: moveInRight 1s ease-out;
+
+        @include respond(phone) {
+            letter-spacing: .5rem;
+        }
+    }
+    
+}
+
+.heading-secondary {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: inline-block;
+    background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+    -webkit-background-clip: text; //background gets clipped EXACTLY where the text is. only visible where the text is
+    color: transparent; //need to put this so the text is transparent and only the CLIPPED BG IS VISIBLE
+    letter-spacing: 2px;
+    transition: all .2s; //smoother transforms
+
+    @include respond(tab-port) {
+        font-size: 3rem;
+    }
+
+    @include respond(phone) {
+        font-size: 2.5rem;
+    }
+
+    &:hover {
+        transform: skewY(2deg) skewX(15deg) scale(1.1); 
+        text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+    }
+}
+
+.heading-tertiary {
+    font-size: $default-font-size;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.paragraph {
+    font-size: $default-font-size;
+    
+    &:not(:last-child) {
+        margin-bottom: 3rem;
+    }
+}

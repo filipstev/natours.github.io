@@ -1,0 +1,121 @@
+.btn {
+    &, 
+    &:link,                /* 'normal' states of the button */
+    &:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        display: inline-block; /* because it is an inline element, but needs to drop in the second line  */
+        border-radius: 10rem;
+        transition: all .2s; /* nicer transition when hovering and entering and all */
+        position: relative; /* so the ::after one can be block */
+        font-size: $default-font-size;
+
+        //change for the <button> element
+        border: none;
+        cursor: pointer;
+        
+
+    }
+
+    &:hover { /* when hovered on */
+        transform: translateY(-.3rem); /* going up a bit */
+        box-shadow: 0 1rem 2rem rgba($color-black,.2); /* bottom shadow under the button. X-axis, Y-axis, how big the border is, color */
+    
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6); /* making it bigger when hovered on */
+        /* making it dissaperar afterwards */
+        opacity: 0; 
+        }
+    }
+
+    &:active,
+    &:focus { /* When clicked on */
+        outline: none;
+        transform: translateY(-.1rem);
+        box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+    }
+
+    &--white { /* 'normal' state of the buttons with that class */
+        background-color: $color-white;
+        color: $color-grey-dark;
+
+            &::after {
+                background-color: $color-white;
+            }
+    }
+
+    &--green { /* 'normal' state of the buttons with that class */
+        background-color: $color-primary;
+        color: $color-white;
+
+            &::after {
+                background-color: $color-primary;
+            }
+    }
+
+    &::after { /* acts like a separate pseudo element. needs to have content, display, width and height same as the original button so it can look the same */
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 100px;
+        position:absolute; 
+        top:0;
+        left: 0;
+        z-index: -1; /* so the pseudo after button is behind the original button */
+        transition: all .4s; /* the transition that  makes the button bigger and then dissapear(because of opacity 0 down below)*/
+    }
+
+    &--animated {
+        animation: moveInBottom .5s ease-out .75s;
+        animation-fill-mode: backwards;
+    }
+}
+
+.btn-text {
+
+    &:link,
+    &:visited {
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary;
+        padding: 3px;
+        transition: all .2s;
+    }
+
+    &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-black, .15);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        box-shadow: 0 .5rem 1rem rgba($color-black, .15);
+        transform: translateY(0);
+    }
+}
+
+#glitch {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block; /* because it is an inline element, but needs to drop in the second line  */
+    border-radius: 10rem;
+    transition: all .2s; /* nicer transition when hovering and entering and all */
+    position: relative; /* so the ::after one can be block */
+    font-size: $default-font-size;
+
+    //change for the <button> element
+    border: none;
+    cursor: pointer;
+    top: 1.5rem;
+
+    @include respond(tab-port) {
+        position: relative;
+        top: -2rem;
+    }
+}

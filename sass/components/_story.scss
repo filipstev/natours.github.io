@@ -1,0 +1,84 @@
+.story {
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color: rgba($color-white, .6);
+    border-radius: 3px;
+    padding: 6rem;
+    font-size: $default-font-size;
+    transform: skewX(-12deg); //makes the whole section krivudavo
+
+    @include respond(tab-port) {
+        width: 75%;
+        padding: 4rem;
+    }
+
+    @include respond(phone) {
+        transform: skewX(0);
+    }
+
+    &__shape {
+        width: 15rem;
+        height: 15rem;
+        float: left;
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(40% at 50% 50%);
+       
+        transform: translateX(-3rem) skewX(12deg);
+        position: relative;
+        overflow: hidden; //cuts of the part of the image which is bigger than the shape
+        border-radius: 50%;
+
+        @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+            -webkit-clip-path: circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%);
+            -webkit-shape-outside: circle(50% at 50% 50%);
+            shape-outside: circle(50% at 50% 50%);
+            border-radius: none;
+        }
+
+        @include respond(phone) {
+            transform: translateX(-3rem) skewX(0);
+        }
+    }
+
+    &__img {
+        height:100%; // image gets the height of his parent. OBAVEZNO
+        transform: translateX(-4rem) scale(1.4); //initial state
+        backface-visibility: hidden;
+        transition: all .5s;
+        overflow: hidden;
+    }
+
+    &__text {
+        transform: skewX(12deg); //u suprotnom smeru da se izravna slika
+    
+        @include respond(phone) {
+            transform: skewX(0);
+        }
+    }
+
+    &__caption {
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;
+        transition: all .5s;
+        backface-visibility: hidden; //prevents "shaking"
+    }
+
+    &:hover &__caption {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover &__img {
+        transform: translateX(-4rem) scale(1); //zooms out
+        filter: blur(2px) brightness(80%) ; //makes it blurry and darker
+    }
+}
